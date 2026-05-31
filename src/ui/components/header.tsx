@@ -5,6 +5,7 @@ import { CartNavItem } from "./nav/components/cart-nav-item";
 import { UserMenuContainer } from "./nav/components/user-menu/user-menu-container";
 import { MobileMenu } from "./nav/components/mobile-menu";
 import { SearchBar } from "./nav/components/search-bar";
+import { ThemeToggle } from "./theme-toggle";
 
 function SearchBarSkeleton() {
 	return <div className="h-10 w-full max-w-md animate-pulse rounded-lg bg-secondary" />;
@@ -28,9 +29,9 @@ function NavLinksSkeleton() {
 
 export async function Header({ channel }: { channel: string }) {
 	return (
-		<header className="sticky top-0 z-40 border-b border-border bg-background">
+		<header className="bg-background/95 supports-[backdrop-filter]:bg-background/80 sticky top-0 z-40 border-b border-border backdrop-blur">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-				<div className="flex h-16 items-center justify-between gap-4">
+				<div className="flex h-20 items-center justify-between gap-4">
 					{/* Logo - no Suspense needed (simple server component) */}
 					<Logo />
 
@@ -50,6 +51,7 @@ export async function Header({ channel }: { channel: string }) {
 
 					{/* Actions */}
 					<div className="flex items-center gap-1">
+						<ThemeToggle />
 						<Suspense fallback={<div className="h-10 w-10" />}>
 							<UserMenuContainer />
 						</Suspense>

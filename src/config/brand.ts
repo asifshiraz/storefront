@@ -15,28 +15,29 @@
 
 export const brandConfig = {
 	/** Site name used in titles, metadata, and headers */
-	siteName: "Saleor Store",
+	siteName: "Node Runner",
 
 	/** Legal entity name for copyright notices */
-	copyrightHolder: "Saleor Demo Store",
+	copyrightHolder: "Node Runner",
 
 	/** Organization name for structured data (JSON-LD) */
-	organizationName: "Saleor Store",
+	organizationName: "Node Runner",
 
 	/** Default brand name for products without a brand */
-	defaultBrand: "Saleor Store",
+	defaultBrand: "Node Runner",
 
 	/** Tagline/description for the store */
-	tagline: "Premium products with exceptional quality. Discover our curated collection.",
+	tagline: "Sovereign Bitcoin hardware and full-node kits. Verify, don't trust.",
 
 	/** Homepage meta description */
-	description: "Starter pack for building performant e-commerce experiences with Saleor.",
+	description:
+		"Node Runner is the trusted store for Bitcoin hardware and full-node kits — sovereign, decentralized, and engineered to run.",
 
 	/** Logo aria-label for accessibility */
-	logoAriaLabel: "Store",
+	logoAriaLabel: "Node Runner — Bitcoin Hardware & Nodes",
 
 	/** Title template - %s will be replaced with page title */
-	titleTemplate: "%s | Saleor Store",
+	titleTemplate: "%s | Node Runner",
 
 	/** Social media handles */
 	social: {

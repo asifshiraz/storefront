@@ -1,77 +1,72 @@
 /**
  * ========================================
- * SALEOR STOREFRONT - DESIGN TOKENS
+ * NODE RUNNER STOREFRONT - DESIGN TOKENS
  * ========================================
  *
- * This file defines the visual foundation of the storefront using
- * CSS custom properties. These tokens are consumed by Tailwind CSS
- * via the theme configuration in tailwind.config.ts.
+ * Palette pulled from the Node Runner logo:
+ *   - Deep navy           #0E1B2C
+ *   - Card / panel navy   #15243A
+ *   - Slate border        #25364F
+ *   - Roadrunner blue     #4A9EE0
+ *   - Bitcoin orange      #F08A2C  (primary CTA)
+ *   - Bone white          #F4EFE4
  *
- * Color Format: OKLCH (Oklab Lightness Chroma Hue)
- * - Modern perceptually uniform color space
- * - Better for programmatic color manipulation
- * - Supported in all modern browsers
+ * Vibe: modern, sovereign, decentralized — but trustworthy
+ * and professional (think Best Buy in a dark suit).
  *
- * Design System:
- * - Minimal e-commerce theme with warm neutrals
- * - Near-black for primary actions and headings
- * - Warm off-whites for backgrounds
- * - Red accent for destructive/sale indicators
- *
- * Typography:
- * - Geist font family (loaded via Next.js font system in layout.tsx)
- * - Font variables set on <html> element: --font-geist-sans, --font-geist-mono
+ * Color Format: OKLCH (perceptually uniform, easy to tweak).
  */
 
 /* ============================================
- * Light Theme (Default)
+ * Light Theme (optional — for the toggle)
  * ============================================ */
 :root {
 	/* --- Backgrounds --- */
-	--background: oklch(0.98 0.005 90); /* Page background - warm off-white */
-	--card: oklch(1 0 0); /* Card surfaces - pure white */
-	--popover: oklch(1 0 0); /* Popover/dropdown backgrounds */
-	--secondary: oklch(0.96 0.003 90); /* Secondary surfaces */
-	--muted: oklch(0.94 0.003 90); /* Muted/disabled backgrounds */
-	--accent: oklch(0.94 0.003 90); /* Accent backgrounds */
+	--background: oklch(0.98 0.005 80);
+	--card: oklch(1 0 0);
+	--popover: oklch(1 0 0);
+	--secondary: oklch(0.95 0.01 240);
+	--muted: oklch(0.94 0.008 240);
+	--accent: oklch(0.94 0.01 240);
 
-	/* --- Foregrounds (Text Colors) --- */
-	--foreground: oklch(0.12 0 0); /* Primary text - near black */
-	--card-foreground: oklch(0.12 0 0);
-	--popover-foreground: oklch(0.12 0 0);
-	--secondary-foreground: oklch(0.12 0 0);
-	--muted-foreground: oklch(0.45 0 0); /* Secondary/muted text */
-	--accent-foreground: oklch(0.12 0 0);
+	/* --- Foregrounds --- */
+	--foreground: oklch(0.18 0.03 250);
+	--card-foreground: oklch(0.18 0.03 250);
+	--popover-foreground: oklch(0.18 0.03 250);
+	--secondary-foreground: oklch(0.18 0.03 250);
+	--muted-foreground: oklch(0.45 0.02 250);
+	--accent-foreground: oklch(0.18 0.03 250);
 
-	/* --- Primary (CTA buttons, links) --- */
-	--primary: oklch(0.12 0 0); /* Near black */
-	--primary-foreground: oklch(0.98 0 0); /* White text on primary */
+	/* --- Primary (Bitcoin orange) --- */
+	--primary: oklch(0.72 0.17 55);
+	--primary-foreground: oklch(0.15 0.02 250);
+
+	/* --- Brand accents --- */
+	--brand-orange: oklch(0.72 0.17 55);
+	--brand-blue: oklch(0.68 0.13 240);
+	--brand-navy: oklch(0.22 0.05 255);
 
 	/* --- Semantic Colors --- */
-	--destructive: oklch(0.55 0.2 25); /* Error/delete - red */
+	--destructive: oklch(0.55 0.2 25);
 	--destructive-foreground: oklch(0.98 0 0);
-	--success: oklch(0.55 0.15 145); /* Success - green */
+	--success: oklch(0.6 0.15 145);
 	--success-foreground: oklch(0.98 0 0);
 
 	/* --- Interactive Elements --- */
-	--border: oklch(0.9 0.003 90); /* Border color */
-	--input: oklch(0.9 0.003 90); /* Input borders */
-	--ring: oklch(0.12 0 0); /* Focus ring color */
+	--border: oklch(0.9 0.01 240);
+	--input: oklch(0.9 0.01 240);
+	--ring: oklch(0.72 0.17 55);
 
 	/* --- Layout --- */
-	--radius: 0.5rem; /* Base border radius (8px) */
+	--radius: 0.5rem;
 
 	/* --- Skeleton Delay --- */
-	--skeleton-delay: 300ms; /* Delay before skeleton appears */
+	--skeleton-delay: 300ms;
 }
 
 /* ============================================
  * Delayed Skeleton Animation
- * ============================================
- * Prevents skeleton flash on fast loads.
- * Skeleton stays invisible for --skeleton-delay, then fades in.
- * If content loads before delay, skeleton is never seen.
- */
+ * ============================================ */
 @keyframes skeleton-fade-in {
 	from {
 		opacity: 0;
@@ -82,38 +77,43 @@
 }
 
 /* ============================================
- * Dark Theme
- * Activated by adding .dark class to <html>
+ * Dark Theme — Node Runner default
+ * Activated by the `.dark` class on <html>
  * ============================================ */
 .dark {
-	/* --- Backgrounds --- */
-	--background: oklch(0.12 0 0);
-	--card: oklch(0.16 0 0);
-	--popover: oklch(0.16 0 0);
-	--secondary: oklch(0.22 0 0);
-	--muted: oklch(0.22 0 0);
-	--accent: oklch(0.22 0 0);
+	/* --- Backgrounds: deep navy stack --- */
+	--background: oklch(0.18 0.03 255); /* page — deep navy */
+	--card: oklch(0.22 0.04 255); /* product cards / panels */
+	--popover: oklch(0.24 0.04 255);
+	--secondary: oklch(0.26 0.04 255); /* secondary surfaces */
+	--muted: oklch(0.26 0.03 255);
+	--accent: oklch(0.3 0.05 255);
 
-	/* --- Foregrounds --- */
-	--foreground: oklch(0.98 0 0);
-	--card-foreground: oklch(0.98 0 0);
-	--popover-foreground: oklch(0.98 0 0);
-	--secondary-foreground: oklch(0.98 0 0);
-	--muted-foreground: oklch(0.65 0 0);
-	--accent-foreground: oklch(0.98 0 0);
+	/* --- Foregrounds: bone white --- */
+	--foreground: oklch(0.96 0.01 85); /* primary text */
+	--card-foreground: oklch(0.96 0.01 85);
+	--popover-foreground: oklch(0.96 0.01 85);
+	--secondary-foreground: oklch(0.96 0.01 85);
+	--muted-foreground: oklch(0.72 0.02 240); /* secondary text */
+	--accent-foreground: oklch(0.96 0.01 85);
 
-	/* --- Primary --- */
-	--primary: oklch(0.98 0 0);
-	--primary-foreground: oklch(0.12 0 0);
+	/* --- Primary (Bitcoin orange — main CTAs) --- */
+	--primary: oklch(0.72 0.17 55);
+	--primary-foreground: oklch(0.15 0.02 255);
+
+	/* --- Brand accents (consumable as bg-brand-orange etc) --- */
+	--brand-orange: oklch(0.72 0.17 55);
+	--brand-blue: oklch(0.68 0.13 240);
+	--brand-navy: oklch(0.18 0.03 255);
 
 	/* --- Semantic Colors --- */
-	--destructive: oklch(0.45 0.18 25);
+	--destructive: oklch(0.62 0.22 25);
 	--destructive-foreground: oklch(0.98 0 0);
-	--success: oklch(0.65 0.15 145);
-	--success-foreground: oklch(0.12 0 0);
+	--success: oklch(0.7 0.16 150);
+	--success-foreground: oklch(0.15 0.02 255);
 
 	/* --- Interactive Elements --- */
-	--border: oklch(0.26 0 0);
-	--input: oklch(0.26 0 0);
-	--ring: oklch(0.98 0 0);
+	--border: oklch(0.32 0.04 250); /* slate */
+	--input: oklch(0.3 0.04 250);
+	--ring: oklch(0.72 0.17 55); /* orange focus ring */
 }

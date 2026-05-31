@@ -12,11 +12,11 @@ export const metadata = {
 
 function HeaderSkeleton() {
 	return (
-		<header className="sticky top-0 z-40 border-b border-border bg-background">
+		<header className="bg-background/95 sticky top-0 z-40 border-b border-border backdrop-blur">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-				<div className="flex h-16 items-center justify-between gap-4">
+				<div className="flex h-20 items-center justify-between gap-4">
 					<div className="flex shrink-0 items-center">
-						<Logo className="h-7 w-auto" />
+						<Logo className="h-10" />
 					</div>
 					<div className="hidden flex-1 justify-center md:flex">
 						<div className="h-10 w-full max-w-md animate-pulse rounded-lg bg-secondary" />

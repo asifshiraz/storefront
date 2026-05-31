@@ -12,11 +12,38 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
  */
 export const metadata = rootMetadata;
 
+/**
+ * Runs before paint to set the .dark class from localStorage (or fall back
+ * to dark — Node Runner is dark-by-default). Prevents the dreaded
+ * light-flash-on-load when the user has chosen dark.
+ */
+const themeInitScript = `
+(function () {
+	try {
+		var stored = localStorage.getItem('nr-theme');
+		var theme = stored === 'light' ? 'light' : 'dark';
+		document.documentElement.classList.toggle('dark', theme === 'dark');
+		document.documentElement.style.colorScheme = theme;
+	} catch (_) {
+		document.documentElement.classList.add('dark');
+		document.documentElement.style.colorScheme = 'dark';
+	}
+})();
+`;
+
 export default function RootLayout(props: { children: ReactNode }) {
 	const { children } = props;
 
 	return (
-		<html lang={localeConfig.htmlLang} className={`${GeistSans.variable} ${GeistMono.variable} min-h-dvh`}>
+		<html
+			lang={localeConfig.htmlLang}
+			className={`${GeistSans.variable} ${GeistMono.variable} dark min-h-dvh`}
+			style={{ colorScheme: "dark" }}
+			suppressHydrationWarning
+		>
+			<head>
+				<script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+			</head>
 			<body className="min-h-dvh font-sans">
 				{children}
 				<SpeedInsights />

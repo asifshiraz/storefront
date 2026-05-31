@@ -42,6 +42,11 @@ module.exports = {
 				border: "var(--border)",
 				input: "var(--input)",
 				ring: "var(--ring)",
+				brand: {
+					orange: "var(--brand-orange)",
+					blue: "var(--brand-blue)",
+					navy: "var(--brand-navy)",
+				},
 			},
 			borderRadius: {
 				lg: "var(--radius)",

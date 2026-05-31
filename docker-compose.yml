@@ -11,7 +11,7 @@ services:
         NEXT_PUBLIC_DEFAULT_CHANNEL: ${NEXT_PUBLIC_DEFAULT_CHANNEL}
     restart: always
     ports:
-      - 3000:3000
+      - 3030:3000
     networks:
       - saleor_network
 
@@ -19,4 +19,4 @@ services:
 
 networks:
   saleor_network:
-    external: false
+    external: true

@@ -1,61 +1,63 @@
 /**
- * Shared Logo Component
+ * Shared Logo Component — Node Runner
  *
- * Single source of truth for the storefront logo.
- * Uses external SVG files for better caching and smaller bundle size.
+ * Single source of truth for the storefront logo. Renders the round
+ * Node Runner mark plus a wordmark beside it. The mark is a raster
+ * image (the generated logo art); the wordmark is text so it stays
+ * crisp at every zoom level and theme.
  *
- * - /public/logo.svg: dark logo for light backgrounds
- * - /public/logo-dark.svg: light logo for dark backgrounds
+ * The image lives at `/public/node-runner-logo.png`. Replace that
+ * file to update the artwork — no code changes needed.
  *
  * @example
- * <Logo className="h-7 w-auto" />                    // Header (auto light/dark)
- * <Logo className="h-7 w-auto" inverted />          // Footer (inverted for dark bg)
+ * <Logo className="h-9 w-auto" />                  // Header
+ * <Logo className="h-10 w-auto" inverted />       // Footer (dark bg)
+ * <Logo markOnly className="h-12 w-12" />          // Square contexts
  */
 
 interface LogoProps {
 	className?: string;
 	/** Accessible label for the logo */
 	ariaLabel?: string;
-	/** Invert colors (for dark backgrounds like footer) */
+	/** Invert wordmark color (useful on the always-dark footer in light theme) */
 	inverted?: boolean;
+	/** Hide the wordmark text and show only the circular mark */
+	markOnly?: boolean;
 }
 
-/**
- * Paper + Saleor combined logo (100x23, aspect ratio ~4.35:1)
- * Automatically switches between light/dark mode versions.
- *
- * Uses explicit width/height + aspect-ratio to prevent CLS while
- * allowing flexible sizing via className.
- */
-export const Logo = ({ className, ariaLabel = "Paper by Saleor", inverted = false }: LogoProps) => {
-	// When inverted, swap the light/dark mode logic
-	const lightModeLogo = inverted ? "/logo-dark.svg" : "/logo.svg";
-	const darkModeLogo = inverted ? "/logo.svg" : "/logo-dark.svg";
+const MARK_SRC = "/node-runner-logo.png";
 
-	// Base styles: preserve aspect ratio to prevent CLS
-	// Height classes (e.g., h-7) will work correctly with w-auto
-	const baseStyles = "aspect-[100/23]";
+export const Logo = ({
+	className,
+	ariaLabel = "Node Runner — Bitcoin Hardware & Nodes",
+	inverted = false,
+	markOnly = false,
+}: LogoProps) => {
+	const wordmarkColor = inverted
+		? "text-background dark:text-foreground"
+		: "text-foreground dark:text-foreground";
 
 	return (
-		<>
-			{/* Light mode */}
+		<span className={`inline-flex items-center gap-2.5 ${className ?? ""}`} aria-label={ariaLabel}>
 			{/* eslint-disable-next-line @next/next/no-img-element */}
 			<img
-				src={lightModeLogo}
-				alt={ariaLabel}
-				width={100}
-				height={23}
-				className={`dark:hidden ${baseStyles} ${className ?? ""}`}
+				src={MARK_SRC}
+				alt=""
+				width={64}
+				height={64}
+				className="aspect-square h-full w-auto select-none rounded-full"
+				draggable={false}
 			/>
-			{/* Dark mode */}
-			{/* eslint-disable-next-line @next/next/no-img-element */}
-			<img
-				src={darkModeLogo}
-				alt={ariaLabel}
-				width={100}
-				height={23}
-				className={`hidden dark:block ${baseStyles} ${className ?? ""}`}
-			/>
-		</>
+			{!markOnly && (
+				<span className={`flex flex-col leading-none ${wordmarkColor}`}>
+					<span className="text-[15px] font-bold uppercase tracking-[0.14em] sm:text-base">
+						<span className="text-brand-orange">Node</span> Runner
+					</span>
+					<span className="mt-0.5 hidden text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground sm:block">
+						Bitcoin Hardware &amp; Nodes
+					</span>
+				</span>
+			)}
+		</span>
 	);
 };

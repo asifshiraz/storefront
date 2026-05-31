@@ -8,8 +8,8 @@ import { SearchSort } from "./search-sort";
 import { SearchIcon } from "lucide-react";
 
 export const metadata = {
-	title: "Search products · Saleor Storefront example",
-	description: "Search products in Saleor Storefront example",
+	title: "Search · Node Runner",
+	description: "Search Node Runner for Bitcoin hardware and full-node kits.",
 };
 
 type SearchParams = {

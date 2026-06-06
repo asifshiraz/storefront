@@ -6,7 +6,7 @@
  * image (the generated logo art); the wordmark is text so it stays
  * crisp at every zoom level and theme.
  *
- * The image lives at `/public/node-runner-logo.png`. Replace that
+ * The image lives at `/public/node-runner-logo-banner.png`. Replace that
  * file to update the artwork — no code changes needed.
  *
  * @example
@@ -25,7 +25,7 @@ interface LogoProps {
 	markOnly?: boolean;
 }
 
-const MARK_SRC = "/node-runner-logo.png";
+const MARK_SRC = "/node-runner-logo-banner.png";
 
 export const Logo = ({
 	className,

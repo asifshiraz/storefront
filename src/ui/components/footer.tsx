@@ -67,7 +67,7 @@ export async function Footer({ channel }: { channel: string }) {
 					{/* Brand */}
 					<div className="col-span-2 md:col-span-1">
 						<Link href={`/${channel}`} prefetch={false} className="mb-4 inline-block">
-							<Logo className="h-10" inverted />
+							<Logo className="h-10" />
 						</Link>
 						<p className="mt-4 max-w-xs text-sm leading-relaxed text-neutral-400">
 							Sovereign Bitcoin hardware and full-node kits. Run your own node. Verify, don&apos;t trust.

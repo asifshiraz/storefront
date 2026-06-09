@@ -23,6 +23,11 @@ const config = {
 				hostname: "*.media.saleor.cloud",
 			},
 			{
+				// Saleor API / media uploads
+				protocol: "https",
+				hostname: "api.noderunner.shop",
+			},
+			{
 				// Allow all hostnames in development (restrict in production)
 				hostname: "*",
 			},

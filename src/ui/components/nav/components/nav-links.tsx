@@ -4,26 +4,30 @@ import { executePublicGraphQL } from "@/lib/graphql";
 import { MenuGetBySlugDocument } from "@/gql/graphql";
 import { CACHE_PROFILES, applyCacheProfile } from "@/lib/cache-manifest";
 
-export const NavLinks = async ({ channel }: { channel: string }) => {
+async function getNavMenu(channel: string) {
 	"use cache";
 	applyCacheProfile(CACHE_PROFILES.navigation);
 
 	const result = await executePublicGraphQL(MenuGetBySlugDocument, {
 		variables: { slug: "navbar", channel },
-		revalidate: 60 * 60, // 1 hour
+		revalidate: 60 * 60,
 	});
 
-	if (!result.ok) {
-		// During build, if the API is unreachable, render minimal nav.
-		// The page will re-fetch when a user visits.
-		console.warn(`[NavLinks] Failed to fetch navigation for ${channel}:`, result.error.message);
+	return result.ok ? result.data : null;
+}
+
+export const NavLinks = async ({ channel }: { channel: string }) => {
+	const data = await getNavMenu(channel).catch(() => null);
+
+	if (!data) {
+		console.warn(`[NavLinks] Failed to fetch navigation for ${channel}`);
 		return <NavLink href="/products">All</NavLink>;
 	}
 
 	return (
 		<>
 			<NavLink href="/products">All</NavLink>
-			{result.data.menu?.items?.map((item) => {
+			{data.menu?.items?.map((item) => {
 				if (item.category) {
 					return (
 						<NavLink key={item.id} href={`/categories/${item.category.slug}`}>

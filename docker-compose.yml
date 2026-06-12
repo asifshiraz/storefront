@@ -7,11 +7,16 @@ services:
     restart: always
     ports:
       - 3030:3000
+    environment:
+      - SALEOR_API_URL=http://saleor-platform-api-1:8000/graphql/
     networks:
       - saleor_network
+      - saleor-platform_saleor-backend-tier
 
   # Add more containers below (nginx, postgres, etc.)
 
 networks:
   saleor_network:
+    external: true
+  saleor-platform_saleor-backend-tier:
     external: true

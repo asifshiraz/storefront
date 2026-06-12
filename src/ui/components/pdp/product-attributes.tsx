@@ -66,7 +66,7 @@ export function ProductAttributes({
 						Description
 					</AccordionTrigger>
 					<AccordionContent>
-						<div className="prose prose-sm max-w-none text-muted-foreground prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-foreground prose-strong:text-foreground">
+						<div className="prose max-w-none text-muted-foreground prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-foreground prose-strong:text-foreground">
 							{descriptionHtml.map((html) => (
 								<div key={html} dangerouslySetInnerHTML={{ __html: html }} />
 							))}

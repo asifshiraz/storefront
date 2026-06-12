@@ -3,9 +3,6 @@ set -e
 
 cd /mnt/d/Noderunner/storefront
 
-echo "Pulling latest code..."
-git pull
-
 echo "Loading env vars..."
 export $(cat .env | sed 's/\r//' | grep -v '^#' | grep -v '^$' | xargs)
 

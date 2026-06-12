@@ -13,6 +13,7 @@ const config = {
 		// (max 3 concurrent requests + 200ms delay between requests)
 	},
 	images: {
+		unoptimized: true,
 		remotePatterns: [
 			{
 				// Saleor Cloud CDN

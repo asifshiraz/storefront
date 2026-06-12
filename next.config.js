@@ -13,7 +13,6 @@ const config = {
 		// (max 3 concurrent requests + 200ms delay between requests)
 	},
 	images: {
-		unoptimized: true,
 		remotePatterns: [
 			{
 				// Saleor Cloud CDN
@@ -43,6 +42,17 @@ const config = {
 			: process.env.NEXT_OUTPUT === "export"
 				? "export"
 				: undefined,
+
+	// Proxy Saleor media through Next.js server to avoid hairpin NAT issues in container deployments.
+	// Containers can't reach api.noderunner.shop (host's port 443), so we proxy internally.
+	async rewrites() {
+		return [
+			{
+				source: "/saleor-media/:path*",
+				destination: "http://saleor-platform-api-1:8000/media/:path*",
+			},
+		];
+	},
 
 	// Cache headers for static assets and API routes
 	async headers() {

@@ -7,6 +7,7 @@ import { Plus } from "lucide-react";
 import { Button } from "@/ui/components/ui/button";
 import { Badge } from "@/ui/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { transformSaleorMediaUrl } from "@/lib/saleor-image-url";
 
 export interface ProductCardData {
 	id: string;
@@ -62,7 +63,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
 				<div className="relative mb-4 aspect-[3/4] overflow-hidden rounded-xl bg-secondary">
 					{/* Primary Image */}
 					<Image
-						src={product.image}
+						src={transformSaleorMediaUrl(product.image)}
 						alt={product.imageAlt || product.name}
 						fill
 						sizes="(max-width: 1024px) 50vw, 33vw"
@@ -76,7 +77,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
 					{/* Hover Image - desktop only to avoid double-tap on touch */}
 					{product.hoverImage && (
 						<Image
-							src={product.hoverImage}
+							src={transformSaleorMediaUrl(product.hoverImage)}
 							alt={`${product.name} - alternate view`}
 							fill
 							sizes="(max-width: 1024px) 50vw, 33vw"

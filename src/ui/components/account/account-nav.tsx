@@ -6,6 +6,7 @@ import { LayoutGrid, Receipt, MapPin, Settings, ArrowLeft } from "lucide-react";
 import { LinkWithChannel } from "@/ui/atoms/link-with-channel";
 import { cn } from "@/lib/utils";
 import { logout } from "@/app/actions";
+import { transformSaleorMediaUrl } from "@/lib/saleor-image-url";
 import { useAccountUser } from "@/ui/components/account/account-context";
 import { accountRoutes } from "@/ui/components/account/routes";
 
@@ -52,7 +53,7 @@ export function AccountNav() {
 			<div className="mb-8 hidden md:block">
 				{user.avatar ? (
 					<Image
-						src={user.avatar.url}
+						src={transformSaleorMediaUrl(user.avatar.url)}
 						alt={user.avatar.alt ?? ""}
 						width={44}
 						height={44}

@@ -8,6 +8,7 @@ import { Button } from "@/ui/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetCloseButton } from "@/ui/components/ui/sheet";
 import { useCart } from "./cart-context";
 import { deleteCartLine, updateCartLineQuantity } from "./actions";
+import { transformSaleorMediaUrl } from "@/lib/saleor-image-url";
 import { cn } from "@/lib/utils";
 import { formatMoney } from "@/lib/utils";
 import { localeConfig } from "@/config/locale";
@@ -214,7 +215,7 @@ export function CartDrawer({ checkoutId, lines, totalPrice, channel }: CartDrawe
 											>
 												{line.variant.product.thumbnail?.url && (
 													<Image
-														src={line.variant.product.thumbnail.url}
+														src={transformSaleorMediaUrl(line.variant.product.thumbnail.url)}
 														alt={line.variant.product.thumbnail.alt ?? line.variant.product.name}
 														fill
 														className="object-cover transition-transform duration-300 group-hover:scale-105"

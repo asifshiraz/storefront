@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { type UserDetailsFragment } from "@/gql/graphql";
+import { transformSaleorMediaUrl } from "@/lib/saleor-image-url";
 
 type Props = {
 	user: UserDetailsFragment;
@@ -16,7 +17,7 @@ export const UserAvatar = ({ user }: Props) => {
 			<Image
 				className="h-8 w-8 rounded-full border"
 				aria-hidden="true"
-				src={user.avatar.url}
+				src={transformSaleorMediaUrl(user.avatar.url)}
 				width={24}
 				height={24}
 				alt=""

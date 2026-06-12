@@ -3,6 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { transformSaleorMediaUrl } from "@/lib/saleor-image-url";
 import {
 	Carousel,
 	CarouselContent,
@@ -121,7 +122,7 @@ export function ImageCarousel({
 									onClick={() => onImageClick?.(index)}
 								>
 									<Image
-										src={image.url}
+										src={transformSaleorMediaUrl(image.url)}
 										alt={image.alt || `${productName} - View ${index + 1}`}
 										fill
 										className="object-cover"
@@ -174,7 +175,7 @@ export function ImageCarousel({
 							)}
 						>
 							<Image
-								src={image.url}
+								src={transformSaleorMediaUrl(image.url)}
 								alt={`${productName} - Thumbnail ${index + 1}`}
 								fill
 								className="object-cover"

@@ -5,6 +5,7 @@ import { OrderByNumberDocument } from "@/gql/graphql";
 import { executeAuthenticatedGraphQL } from "@/lib/graphql";
 import { LinkWithChannel } from "@/ui/atoms/link-with-channel";
 import { formatDate, formatMoney } from "@/lib/utils";
+import { transformSaleorMediaUrl } from "@/lib/saleor-image-url";
 import { OrderTimeline } from "@/ui/components/account/order-timeline";
 import { OrderStatusBadge } from "@/ui/components/account/order-status-badge";
 import { type AddressDetailsFragment } from "@/gql/graphql";
@@ -69,7 +70,7 @@ export default async function OrderDetailPage({ params }: Props) {
 										{product.thumbnail && (
 											<div className="bg-secondary/30 h-16 w-16 shrink-0 overflow-hidden rounded-lg border">
 												<Image
-													src={product.thumbnail.url}
+													src={transformSaleorMediaUrl(product.thumbnail.url)}
 													alt={product.thumbnail.alt ?? ""}
 													width={128}
 													height={128}

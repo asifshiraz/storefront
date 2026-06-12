@@ -3,6 +3,7 @@
 import { useState, type FC } from "react";
 import Image from "next/image";
 import { Tag, ShieldCheck, RotateCcw, Truck, ChevronDown, ShoppingBag } from "lucide-react";
+import { transformSaleorMediaUrl } from "@/lib/saleor-image-url";
 import { Button } from "@/ui/components/ui/button";
 import { Input } from "@/ui/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -172,7 +173,7 @@ export const OrderSummary: FC<OrderSummaryProps> = ({ checkout, order, editable 
 								>
 									{line.imageUrl ? (
 										<Image
-											src={line.imageUrl}
+											src={transformSaleorMediaUrl(line.imageUrl)}
 											alt={line.imageAlt || line.name}
 											width={32}
 											height={32}
@@ -239,7 +240,7 @@ export const OrderSummary: FC<OrderSummaryProps> = ({ checkout, order, editable 
 										<div className="h-14 w-14 overflow-hidden rounded-lg border border-border bg-secondary">
 											{line.imageUrl ? (
 												<Image
-													src={line.imageUrl}
+													src={transformSaleorMediaUrl(line.imageUrl)}
 													alt={line.imageAlt || line.name}
 													width={56}
 													height={56}

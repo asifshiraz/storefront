@@ -14,6 +14,7 @@ podman build \
   --build-arg NEXT_PUBLIC_SALEOR_API_URL=$NEXT_PUBLIC_SALEOR_API_URL \
   --build-arg NEXT_PUBLIC_STOREFRONT_URL=$NEXT_PUBLIC_STOREFRONT_URL \
   --build-arg NEXT_PUBLIC_DEFAULT_CHANNEL=$NEXT_PUBLIC_DEFAULT_CHANNEL \
+  --build-arg NEXT_PUBLIC_SALEOR_MEDIA_PROXY=true \
   -t asifshiraz/saleor-storefront:latest .
 
 echo "Pushing to Docker Hub..."

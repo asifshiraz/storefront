@@ -8,12 +8,15 @@ async function getNavMenu(channel: string) {
 	"use cache";
 	applyCacheProfile(CACHE_PROFILES.navigation);
 
-	const result = await executePublicGraphQL(MenuGetBySlugDocument, {
-		variables: { slug: "navbar", channel },
-		revalidate: 60 * 60,
-	});
-
-	return result.ok ? result.data : null;
+	try {
+		const result = await executePublicGraphQL(MenuGetBySlugDocument, {
+			variables: { slug: "navbar", channel },
+			revalidate: 60 * 60,
+		});
+		return result.ok ? result.data : null;
+	} catch {
+		return null;
+	}
 }
 
 export const NavLinks = async ({ channel }: { channel: string }) => {

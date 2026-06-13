@@ -13,6 +13,12 @@ const config = {
 		// (max 3 concurrent requests + 200ms delay between requests)
 	},
 	images: {
+		localPatterns: [
+			{
+				// Allow the /saleor/* proxy path used to avoid hairpin NAT in container deployments
+				pathname: "/saleor/**",
+			},
+		],
 		remotePatterns: [
 			{
 				// Saleor Cloud CDN

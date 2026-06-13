@@ -37,6 +37,11 @@ ENV NEXT_PUBLIC_SALEOR_MEDIA_PROXY=${NEXT_PUBLIC_SALEOR_MEDIA_PROXY}
 # Disable telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
 
+# During build the Saleor API is unreachable (container networking not available).
+# Fail fast so "use cache" functions return null before Next.js fires USE_CACHE_TIMEOUT.
+ENV SALEOR_REQUEST_TIMEOUT_MS=2000
+ENV NEXT_BUILD_RETRIES=0
+
 # Get PNPM version from package.json
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"

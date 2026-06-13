@@ -65,6 +65,48 @@
 }
 
 /* ============================================
+ * Light Content Section
+ * Overrides dark-mode variables on <main> so the product
+ * area has a light background while header/footer stay dark.
+ * ============================================ */
+.light-section {
+	/* Backgrounds */
+	--background: oklch(0.97 0.006 240); /* near-white with a whisper of navy */
+	--card: oklch(1 0 0); /* pure white product cards */
+	--popover: oklch(1 0 0);
+	--secondary: oklch(0.94 0.01 240); /* light blue-gray for image containers */
+	--muted: oklch(0.94 0.008 240);
+	--accent: oklch(0.94 0.01 240);
+	/* Foregrounds */
+	--foreground: oklch(0.18 0.03 250);
+	--card-foreground: oklch(0.18 0.03 250);
+	--popover-foreground: oklch(0.18 0.03 250);
+	--secondary-foreground: oklch(0.18 0.03 250);
+	--muted-foreground: oklch(0.45 0.02 250);
+	--accent-foreground: oklch(0.18 0.03 250);
+	/* Primary */
+	--primary: oklch(0.72 0.17 55);
+	--primary-foreground: oklch(0.15 0.02 250);
+	/* Brand */
+	--brand-orange: oklch(0.72 0.17 55);
+	--brand-blue: oklch(0.68 0.13 240);
+	--brand-navy: oklch(0.22 0.05 255);
+	/* Semantic */
+	--destructive: oklch(0.55 0.2 25);
+	--destructive-foreground: oklch(0.98 0 0);
+	--success: oklch(0.6 0.15 145);
+	--success-foreground: oklch(0.98 0 0);
+	/* Interactive */
+	--border: oklch(0.9 0.01 240);
+	--input: oklch(0.9 0.01 240);
+	--ring: oklch(0.72 0.17 55);
+
+	background-color: var(--background);
+	color: var(--foreground);
+	color-scheme: light;
+}
+
+/* ============================================
  * Delayed Skeleton Animation
  * ============================================ */
 @keyframes skeleton-fade-in {

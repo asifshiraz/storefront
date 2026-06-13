@@ -8,6 +8,7 @@ services:
     ports:
       - 3030:3000
     environment:
+      - HOSTNAME=0.0.0.0
       - SALEOR_API_URL=http://saleor-platform-api-1:8000/graphql/
     networks:
       - saleor_network

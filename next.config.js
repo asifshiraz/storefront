@@ -48,8 +48,8 @@ const config = {
 	async rewrites() {
 		return [
 			{
-				source: "/saleor-media/:path*",
-				destination: "http://saleor-platform-api-1:8000/media/:path*",
+				source: "/saleor/:path*",
+				destination: "http://saleor-platform-api-1:8000/:path*",
 			},
 		];
 	},

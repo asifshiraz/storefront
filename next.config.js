@@ -18,6 +18,10 @@ const config = {
 				// Allow the /saleor/* proxy path used to avoid hairpin NAT in container deployments
 				pathname: "/saleor/**",
 			},
+			{
+				// Allow hero banner images served from public/banners/
+				pathname: "/banners/**",
+			},
 		],
 		remotePatterns: [
 			{

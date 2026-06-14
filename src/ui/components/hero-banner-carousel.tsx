@@ -21,10 +21,10 @@ export function HeroBannerCarousel({ slides }: HeroBannerCarouselProps) {
 	if (slides.length === 0) return null;
 
 	return (
-		<Carousel plugins={[autoplay.current]} opts={{ loop: true }} className="w-full">
+		<Carousel plugins={[autoplay.current]} opts={{ loop: true }} className="w-full" aria-label="Hero banner">
 			<CarouselContent className="-ml-0">
 				{slides.map((slide, index) => (
-					<CarouselItem key={slide.src} className="pl-0">
+					<CarouselItem key={index} className="pl-0">
 						<div className="relative aspect-square sm:aspect-[5/2]">
 							<Image
 								src={slide.src}
@@ -39,7 +39,7 @@ export function HeroBannerCarousel({ slides }: HeroBannerCarouselProps) {
 								alt={slide.alt}
 								fill
 								className="object-cover sm:hidden"
-								priority={index === 0}
+								priority={false}
 								sizes="100vw"
 							/>
 						</div>

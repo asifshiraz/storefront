@@ -1,3 +1,5 @@
+"use client";
+
 import { getCopyrightText } from "@/config/brand";
 
 export function CopyrightText() {

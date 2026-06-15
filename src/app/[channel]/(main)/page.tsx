@@ -1,18 +1,10 @@
 import { Suspense } from "react";
-import dynamic from "next/dynamic";
 import { ProductListByCollectionDocument, ProductOrderField, OrderDirection } from "@/gql/graphql";
 import { executePublicGraphQL } from "@/lib/graphql";
 import { CACHE_PROFILES, applyCacheProfile } from "@/lib/cache-manifest";
 import { ProductList } from "@/ui/components/product-list";
+import { HeroBannerCarouselLoader } from "@/ui/components/hero-banner-carousel-loader";
 import type { HeroSlide } from "@/ui/components/hero-banner-carousel";
-
-const HeroBannerCarousel = dynamic(
-	() => import("@/ui/components/hero-banner-carousel").then((mod) => ({ default: mod.HeroBannerCarousel })),
-	{
-		ssr: false,
-		loading: () => <div className="aspect-square animate-pulse bg-secondary sm:aspect-[5/2]" />,
-	},
-);
 
 export const metadata = {
 	title: "Node Runner — Bitcoin Hardware & Nodes",
@@ -53,7 +45,7 @@ export default function Page(props: { params: Promise<{ channel: string }> }) {
 	return (
 		<div className="bg-foreground">
 			<section className="mx-auto max-w-7xl bg-background px-8 pb-16">
-				<HeroBannerCarousel slides={SLIDES} />
+				<HeroBannerCarouselLoader slides={SLIDES} />
 				<div className="mt-8" />
 				<h2 className="sr-only">Product list</h2>
 				<Suspense

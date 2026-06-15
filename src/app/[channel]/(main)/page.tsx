@@ -42,8 +42,9 @@ async function getFeaturedProducts(channel: string) {
 
 export default function Page(props: { params: Promise<{ channel: string }> }) {
 	return (
-		<section className="mx-auto max-w-7xl p-8 pb-16">
+		<section className="mx-auto max-w-7xl px-8 pb-16">
 			<HeroBannerCarousel slides={SLIDES} />
+			<div className="mt-8" />
 			<h2 className="sr-only">Product list</h2>
 			<Suspense
 				fallback={

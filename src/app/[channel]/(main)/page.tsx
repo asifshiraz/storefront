@@ -1,9 +1,18 @@
 import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import { ProductListByCollectionDocument, ProductOrderField, OrderDirection } from "@/gql/graphql";
 import { executePublicGraphQL } from "@/lib/graphql";
 import { CACHE_PROFILES, applyCacheProfile } from "@/lib/cache-manifest";
 import { ProductList } from "@/ui/components/product-list";
-import { HeroBannerCarousel, type HeroSlide } from "@/ui/components/hero-banner-carousel";
+import type { HeroSlide } from "@/ui/components/hero-banner-carousel";
+
+const HeroBannerCarousel = dynamic(
+	() => import("@/ui/components/hero-banner-carousel").then((mod) => ({ default: mod.HeroBannerCarousel })),
+	{
+		ssr: false,
+		loading: () => <div className="aspect-square animate-pulse bg-secondary sm:aspect-[5/2]" />,
+	},
+);
 
 export const metadata = {
 	title: "Node Runner — Bitcoin Hardware & Nodes",

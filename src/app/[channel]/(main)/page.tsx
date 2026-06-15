@@ -42,36 +42,34 @@ async function getFeaturedProducts(channel: string) {
 
 export default function Page(props: { params: Promise<{ channel: string }> }) {
 	return (
-		<>
+		<section className="mx-auto max-w-7xl p-8 pb-16">
 			<HeroBannerCarousel slides={SLIDES} />
-			<section className="mx-auto max-w-7xl p-8 pb-16">
-				<h2 className="sr-only">Product list</h2>
-				<Suspense
-					fallback={
-						<ul
-							role="list"
-							data-testid="ProductList"
-							className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
-						>
-							{Array.from({ length: 12 }).map((_, i) => (
-								<li key={i} className="animate-pulse">
-									<div className="aspect-square overflow-hidden bg-secondary" />
-									<div className="mt-2 flex justify-between">
-										<div>
-											<div className="mt-1 h-4 w-32 rounded bg-secondary" />
-											<div className="mt-1 h-4 w-20 rounded bg-secondary" />
-										</div>
-										<div className="mt-1 h-4 w-16 rounded bg-secondary" />
+			<h2 className="sr-only">Product list</h2>
+			<Suspense
+				fallback={
+					<ul
+						role="list"
+						data-testid="ProductList"
+						className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+					>
+						{Array.from({ length: 12 }).map((_, i) => (
+							<li key={i} className="animate-pulse">
+								<div className="aspect-square overflow-hidden bg-secondary" />
+								<div className="mt-2 flex justify-between">
+									<div>
+										<div className="mt-1 h-4 w-32 rounded bg-secondary" />
+										<div className="mt-1 h-4 w-20 rounded bg-secondary" />
 									</div>
-								</li>
-							))}
-						</ul>
-					}
-				>
-					<FeaturedProducts params={props.params} />
-				</Suspense>
-			</section>
-		</>
+									<div className="mt-1 h-4 w-16 rounded bg-secondary" />
+								</div>
+							</li>
+						))}
+					</ul>
+				}
+			>
+				<FeaturedProducts params={props.params} />
+			</Suspense>
+		</section>
 	);
 }
 

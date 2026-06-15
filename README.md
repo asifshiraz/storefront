@@ -3,6 +3,7 @@ How to deploy manually:
 On powershell:
 wsl
 cd /mnt/d/Noderunner/storefront
+podman login docker.io -u asifshiraz
 ./deploy.sh
 Then force redeploy stack on archipelego
 

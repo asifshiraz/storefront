@@ -15,8 +15,8 @@ const config = {
 	images: {
 		localPatterns: [
 			{
-				// Allow the /saleor/* proxy path used to avoid hairpin NAT in container deployments
-				pathname: "/saleor/**",
+				// Allow the /api/saleor-media/* proxy route used to avoid hairpin NAT in container deployments
+				pathname: "/api/saleor-media/**",
 			},
 			{
 				// Allow hero banner images served from public/banners/
@@ -52,17 +52,6 @@ const config = {
 			: process.env.NEXT_OUTPUT === "export"
 				? "export"
 				: undefined,
-
-	// Proxy Saleor media through Next.js server to avoid hairpin NAT issues in container deployments.
-	// Containers can't reach api.noderunner.shop (host's port 443), so we proxy internally.
-	async rewrites() {
-		return [
-			{
-				source: "/saleor/:path*",
-				destination: "http://saleor-platform-api-1:8000/:path*",
-			},
-		];
-	},
 
 	// Cache headers for static assets and API routes
 	async headers() {

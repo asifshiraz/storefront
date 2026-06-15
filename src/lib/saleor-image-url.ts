@@ -9,7 +9,7 @@ const SALEOR_HOST = process.env.NEXT_PUBLIC_SALEOR_API_URL?.replace(/\/graphql\/
 export function transformSaleorMediaUrl(url: string | null | undefined): string {
 	if (!url || !USE_PROXY || !SALEOR_HOST) return url ?? "";
 	if (url.startsWith(SALEOR_HOST + "/")) {
-		return "/saleor" + url.slice(SALEOR_HOST.length).replace(/\/$/, "");
+		return "/api/saleor-media" + url.slice(SALEOR_HOST.length).replace(/\/$/, "");
 	}
 	return url;
 }

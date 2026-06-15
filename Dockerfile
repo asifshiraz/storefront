@@ -8,7 +8,7 @@ WORKDIR /app
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+RUN npm install -g pnpm@10.28.1
 
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm i --frozen-lockfile --prefer-offline
@@ -42,10 +42,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV SALEOR_REQUEST_TIMEOUT_MS=2000
 ENV NEXT_BUILD_RETRIES=0
 
-# Get PNPM version from package.json
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+RUN npm install -g pnpm@10.28.1
 
 RUN pnpm build
 

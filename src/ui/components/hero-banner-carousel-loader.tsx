@@ -17,7 +17,7 @@ export function HeroBannerCarouselLoader({ slides }: { slides: HeroSlide[] }) {
 	const isClient = useIsClient();
 
 	if (!isClient) {
-		return <div className="aspect-square animate-pulse bg-secondary sm:aspect-[5/2]" />;
+		return <div className="aspect-square animate-pulse bg-secondary sm:aspect-[2073/879]" />;
 	}
 
 	return <HeroBannerCarousel slides={slides} />;

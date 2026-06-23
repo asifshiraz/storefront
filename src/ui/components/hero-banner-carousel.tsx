@@ -25,7 +25,7 @@ export function HeroBannerCarousel({ slides }: HeroBannerCarouselProps) {
 			<CarouselContent className="-ml-0">
 				{slides.map((slide, index) => (
 					<CarouselItem key={index} className="pl-0">
-						<div className="relative aspect-square sm:aspect-[5/2]">
+						<div className="relative aspect-square sm:aspect-[2073/879]">
 							<Image
 								src={slide.src}
 								alt={slide.alt}

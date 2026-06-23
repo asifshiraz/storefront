@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# saleor-gql — run a GraphQL query/mutation against the noderunner Saleor admin API.
+#
+# Auth token is read at call time from a file OUTSIDE the repo so it is never
+# committed or printed. Override the path with SALEOR_TOKEN_FILE if needed.
+#
+# Usage:
+#   scripts/saleor-gql '{ shop { name version } }'
+#   scripts/saleor-gql -f query.graphql
+#   echo '{ shop { name } }' | scripts/saleor-gql
+#   scripts/saleor-gql -v '{"id":"..."}' '<query with $id>'
+#
+# Env:
+#   SALEOR_API_URL     default https://api.noderunner.shop/graphql/
+#   SALEOR_TOKEN_FILE  default ~/.config/noderunner/saleor_token
+#   SALEOR_CHANNEL     default default-channel  (exported for convenience)
+
+set -euo pipefail
+
+API_URL="${SALEOR_API_URL:-https://api.noderunner.shop/graphql/}"
+TOKEN_FILE="${SALEOR_TOKEN_FILE:-$HOME/.config/noderunner/saleor_token}"
+export SALEOR_CHANNEL="${SALEOR_CHANNEL:-default-channel}"
+
+VARS='{}'
+QUERY=''
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -f|--file)      QUERY="$(cat "$2")"; shift 2 ;;
+    -v|--variables) VARS="$2"; shift 2 ;;
+    -h|--help)      sed -n '2,20p' "$0"; exit 0 ;;
+    *)              QUERY="$1"; shift ;;
+  esac
+done
+
+# Fall back to stdin if no query was given as an argument.
+if [ -z "$QUERY" ] && [ ! -t 0 ]; then
+  QUERY="$(cat)"
+fi
+
+if [ -z "$QUERY" ]; then
+  echo "saleor-gql: no query provided (pass a string, -f file, or pipe via stdin)" >&2
+  exit 2
+fi
+
+if [ ! -r "$TOKEN_FILE" ]; then
+  echo "saleor-gql: token file not readable: $TOKEN_FILE" >&2
+  echo "  Create it with:  read -rs T && printf '%s' \"\$T\" > \"$TOKEN_FILE\" && chmod 600 \"$TOKEN_FILE\"" >&2
+  exit 1
+fi
+
+TOKEN="$(tr -d '\n' < "$TOKEN_FILE")"
+
+# Build the JSON request body with jq so the query/variables are safely escaped.
+BODY="$(jq -nc --arg q "$QUERY" --argjson v "$VARS" '{query:$q, variables:$v}')"
+
+RESP="$(curl -s --max-time 30 "$API_URL" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "$BODY")"
+
+# Pretty-print if jq is available; otherwise raw.
+echo "$RESP" | jq . 2>/dev/null || echo "$RESP"
+
+# Exit non-zero if the response contains GraphQL errors, so scripts can detect failure.
+echo "$RESP" | jq -e '.errors | not' >/dev/null 2>&1

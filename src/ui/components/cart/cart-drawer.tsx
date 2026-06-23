@@ -1,14 +1,13 @@
 "use client";
 
 import { useTransition } from "react";
-import Image from "next/image";
+import { SaleorImage } from "@/ui/atoms/saleor-image";
 import Link from "next/link";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, Truck, RotateCcw } from "lucide-react";
 import { Button } from "@/ui/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetCloseButton } from "@/ui/components/ui/sheet";
 import { useCart } from "./cart-context";
 import { deleteCartLine, updateCartLineQuantity } from "./actions";
-import { transformSaleorMediaUrl } from "@/lib/saleor-image-url";
 import { cn } from "@/lib/utils";
 import { formatMoney } from "@/lib/utils";
 import { localeConfig } from "@/config/locale";
@@ -214,8 +213,8 @@ export function CartDrawer({ checkoutId, lines, totalPrice, channel }: CartDrawe
 												className="group relative h-24 w-20 shrink-0 overflow-hidden rounded-lg bg-secondary"
 											>
 												{line.variant.product.thumbnail?.url && (
-													<Image
-														src={transformSaleorMediaUrl(line.variant.product.thumbnail.url)}
+													<SaleorImage
+														src={line.variant.product.thumbnail.url}
 														alt={line.variant.product.thumbnail.alt ?? line.variant.product.name}
 														fill
 														className="object-cover transition-transform duration-300 group-hover:scale-105"

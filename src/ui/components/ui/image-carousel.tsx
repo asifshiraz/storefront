@@ -1,9 +1,8 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { transformSaleorMediaUrl } from "@/lib/saleor-image-url";
+import { SaleorImage } from "@/ui/atoms/saleor-image";
 import {
 	Carousel,
 	CarouselContent,
@@ -121,8 +120,8 @@ export function ImageCarousel({
 									className={cn("relative aspect-[4/5] w-full", onImageClick && "cursor-pointer")}
 									onClick={() => onImageClick?.(index)}
 								>
-									<Image
-										src={transformSaleorMediaUrl(image.url)}
+									<SaleorImage
+										src={image.url}
 										alt={image.alt || `${productName} - View ${index + 1}`}
 										fill
 										className="object-cover"
@@ -174,8 +173,8 @@ export function ImageCarousel({
 									: "opacity-60 hover:opacity-100",
 							)}
 						>
-							<Image
-								src={transformSaleorMediaUrl(image.url)}
+							<SaleorImage
+								src={image.url}
 								alt={`${productName} - Thumbnail ${index + 1}`}
 								fill
 								className="object-cover"

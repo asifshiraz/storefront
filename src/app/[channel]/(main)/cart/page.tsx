@@ -1,10 +1,9 @@
 import { Suspense } from "react";
-import Image from "next/image";
+import { SaleorImage } from "@/ui/atoms/saleor-image";
 import { CheckoutLink } from "./checkout-link";
 import { DeleteLineButton } from "./delete-line-button";
 import * as Checkout from "@/lib/checkout";
 import { formatMoney, getHrefForVariant } from "@/lib/utils";
-import { transformSaleorMediaUrl } from "@/lib/saleor-image-url";
 import { LinkWithChannel } from "@/ui/atoms/link-with-channel";
 
 export const metadata = {
@@ -59,8 +58,8 @@ async function CartContent({ params: paramsPromise }: { params: Promise<{ channe
 					<li key={item.id} className="flex py-4">
 						<div className="aspect-square h-24 w-24 shrink-0 overflow-hidden rounded-md border bg-secondary sm:h-32 sm:w-32">
 							{item.variant?.product?.thumbnail?.url && (
-								<Image
-									src={transformSaleorMediaUrl(item.variant.product.thumbnail.url)}
+								<SaleorImage
+									src={item.variant.product.thumbnail.url}
 									alt={item.variant.product.thumbnail.alt ?? ""}
 									width={200}
 									height={200}

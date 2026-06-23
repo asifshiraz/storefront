@@ -1,6 +1,5 @@
-import Image from "next/image";
+import { SaleorImage } from "@/ui/atoms/saleor-image";
 import { ArrowRight } from "lucide-react";
-import { transformSaleorMediaUrl } from "@/lib/saleor-image-url";
 import { type OrderDetailsFragment } from "@/gql/graphql";
 import { LinkWithChannel } from "@/ui/atoms/link-with-channel";
 import { formatDate, formatMoney } from "@/lib/utils";
@@ -33,8 +32,8 @@ export function OrderRow({ order }: Props) {
 						key={i}
 						className="bg-secondary/40 h-12 w-12 shrink-0 overflow-hidden rounded-lg border-2 border-background"
 					>
-						<Image
-							src={transformSaleorMediaUrl(thumb.url)}
+						<SaleorImage
+							src={thumb.url}
 							alt={thumb.alt ?? ""}
 							width={96}
 							height={96}

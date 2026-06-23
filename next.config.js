@@ -15,10 +15,6 @@ const config = {
 	images: {
 		localPatterns: [
 			{
-				// Allow the /api/saleor-media/* proxy route used to avoid hairpin NAT in container deployments
-				pathname: "/api/saleor-media/**",
-			},
-			{
 				// Allow hero banner images served from public/banners/
 				pathname: "/banners/**",
 			},

@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { SearchProduct } from "@/lib/search";
-import { transformSaleorMediaUrl } from "@/lib/saleor-image-url";
+import { SaleorImage } from "@/ui/atoms/saleor-image";
 import { localeConfig } from "@/config/locale";
 
 interface SearchResultsProps {
@@ -51,8 +50,8 @@ function SearchResultCard({
 			{/* Image */}
 			<div className="relative aspect-square overflow-hidden bg-muted">
 				{product.thumbnailUrl ? (
-					<Image
-						src={transformSaleorMediaUrl(product.thumbnailUrl)}
+					<SaleorImage
+						src={product.thumbnailUrl}
 						alt={product.thumbnailAlt || product.name}
 						fill
 						sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

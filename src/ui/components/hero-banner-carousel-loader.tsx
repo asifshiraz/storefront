@@ -18,7 +18,7 @@ export function HeroBannerCarouselLoader({ slides }: { slides: HeroSlide[] }) {
 
 	if (!isClient) {
 		return (
-			<div className="aspect-square animate-pulse bg-secondary sm:aspect-[1792/592] min-[1800px]:aspect-[2048/512]" />
+			<div className="aspect-square animate-pulse bg-secondary sm:aspect-[1792/592] min-[1536px]:aspect-[2368/592]" />
 		);
 	}
 

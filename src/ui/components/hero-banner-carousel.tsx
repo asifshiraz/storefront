@@ -32,7 +32,7 @@ export function HeroBannerCarousel({ slides }: HeroBannerCarouselProps) {
 						{/* Aspect ratio steps with the viewport so each image shows uncropped:
 						    square (mobile) → ~3:1 (desktop) → ~4:1 (very wide). Each ratio must
 						    match its image's real dimensions. */}
-						<div className="relative aspect-square sm:aspect-[1792/592] min-[1800px]:aspect-[2048/512]">
+						<div className="relative aspect-square sm:aspect-[1792/592] min-[1536px]:aspect-[2368/592]">
 							{/* Mobile (square) */}
 							<Image
 								src={slide.mobileSrc ?? slide.src}
@@ -47,7 +47,7 @@ export function HeroBannerCarousel({ slides }: HeroBannerCarouselProps) {
 								src={slide.src}
 								alt={slide.alt}
 								fill
-								className="hidden object-cover sm:block min-[1800px]:hidden"
+								className="hidden object-cover sm:block min-[1536px]:hidden"
 								priority={index === 0}
 								sizes="100vw"
 							/>
@@ -56,7 +56,7 @@ export function HeroBannerCarousel({ slides }: HeroBannerCarouselProps) {
 								src={slide.wideSrc ?? slide.src}
 								alt={slide.alt}
 								fill
-								className="hidden object-cover min-[1800px]:block"
+								className="hidden object-cover min-[1536px]:block"
 								priority={false}
 								sizes="100vw"
 							/>

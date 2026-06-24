@@ -14,17 +14,25 @@ function HeaderSkeleton() {
 	return (
 		<header className="bg-background/95 sticky top-0 z-40 border-b border-border backdrop-blur">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-				<div className="flex h-20 items-center justify-between gap-4">
-					<div className="flex shrink-0 items-center">
-						<Logo className="h-10" />
+				<div className="relative flex h-16 items-center justify-between gap-4">
+					<div className="flex flex-1 items-center gap-2">
+						<div className="h-10 w-10 lg:hidden" />
 					</div>
-					<div className="hidden flex-1 justify-center md:flex">
-						<div className="h-10 w-full max-w-md animate-pulse rounded-lg bg-secondary" />
+					<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+						<Logo className="h-12" />
 					</div>
-					<div className="flex items-center gap-1">
+					<div className="flex flex-1 items-center justify-end gap-1">
 						<div className="h-10 w-10" />
 						<div className="h-10 w-10" />
 					</div>
+				</div>
+			</div>
+			<div className="hidden border-t border-border lg:block">
+				<div className="mx-auto flex h-12 max-w-7xl items-center justify-center gap-8 px-4 sm:px-6 lg:px-8">
+					<span className="h-3 w-12 animate-pulse rounded bg-muted" />
+					<span className="h-3 w-16 animate-pulse rounded bg-muted" />
+					<span className="h-3 w-14 animate-pulse rounded bg-muted" />
+					<span className="h-3 w-16 animate-pulse rounded bg-muted" />
 				</div>
 			</div>
 		</header>
@@ -85,7 +93,7 @@ export default async function RootLayout(props: {
 			<Suspense fallback={<HeaderSkeleton />}>
 				<Header channel={channel} />
 			</Suspense>
-			<div className="flex min-h-[calc(100dvh-64px)] flex-col">
+			<div className="flex min-h-[calc(100dvh-112px)] flex-col">
 				<main className="light-section flex-1">
 					<Suspense fallback={null}>{props.children}</Suspense>
 				</main>

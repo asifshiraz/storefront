@@ -51,17 +51,15 @@ const config = {
 
 	// Cache headers for static assets and API routes
 	async headers() {
-		const isDev = process.env.NODE_ENV === "development";
+		// In development, do NOT set long-term caching on build assets. Dev chunks
+		// are served under stable (non-content-hashed) URLs, so `immutable` caching
+		// makes the browser keep running stale code after a rebuild — which surfaces
+		// as hydration crashes ("Element type is invalid"). Let Next use its own dev
+		// defaults; only apply immutable caching in production (hashed filenames).
+		if (process.env.NODE_ENV === "development") {
+			return [];
+		}
 		return [
-			// In development, prevent aggressive caching of dynamic chunks
-			...(isDev
-				? [
-						{
-							source: "/_next/static/chunks/:path*",
-							headers: [{ key: "Cache-Control", value: "no-store, must-revalidate" }],
-						},
-					]
-				: []),
 			{
 				// Static assets - cache for 1 year (immutable with hash in filename)
 				source: "/_next/static/:path*",

@@ -5,6 +5,8 @@ import { CACHE_PROFILES, applyCacheProfile } from "@/lib/cache-manifest";
 import { ProductList } from "@/ui/components/product-list";
 import { HeroBannerCarouselLoader } from "@/ui/components/hero-banner-carousel-loader";
 import type { HeroSlide } from "@/ui/components/hero-banner-carousel";
+import { CategoryTiles, type CategoryTile } from "@/ui/components/home/category-tiles";
+import { ParallaxBand } from "@/ui/components/home/parallax-band";
 
 export const metadata = {
 	title: "Node Runner — Bitcoin Hardware & Nodes",
@@ -17,6 +19,16 @@ const SLIDES: HeroSlide[] = [
 		mobileSrc: "/banners/carousal-banner-1-mobile.png",
 		alt: "Secure Technologies for a Sovereign Lifestyle",
 	},
+];
+
+const TILES: CategoryTile[] = [
+	{ name: "Phones", slug: "sovereign-mobile-mesh-devices", sub: "GrapheneOS", tone: "accent" },
+	{ name: "Laptops", slug: "modular-laptops", sub: "Framework", tone: "ink" },
+	{ name: "Desktops", slug: "desktops-infrastructure", sub: "Modular & mesh", tone: "ink" },
+	{ name: "Routers", slug: "secure-routers-access-points", sub: "OpenWrt · WireGuard", tone: "stone" },
+	{ name: "Nomad Gear", slug: "nomad-gear", sub: "Keys & shields", tone: "ink" },
+	{ name: "Bundles", slug: "bundles", sub: "Ready-to-run kits", tone: "accent" },
+	{ name: "Services", slug: "services", sub: "Flash · harden · audit", tone: "ink" },
 ];
 
 async function getFeaturedProducts(channel: string) {
@@ -43,38 +55,66 @@ async function getFeaturedProducts(channel: string) {
 
 export default function Page(props: { params: Promise<{ channel: string }> }) {
 	return (
-		<div className="bg-foreground">
-			<div className="mx-auto max-w-7xl bg-background">
-				<HeroBannerCarouselLoader slides={SLIDES} />
-				<section className="px-8 pb-16">
-					<div className="mt-8" />
-					<h2 className="sr-only">Product list</h2>
-					<Suspense
-						fallback={
-							<ul
-								role="list"
-								data-testid="ProductList"
-								className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
-							>
-								{Array.from({ length: 12 }).map((_, i) => (
-									<li key={i} className="animate-pulse">
-										<div className="aspect-square overflow-hidden bg-secondary" />
-										<div className="mt-2 flex justify-between">
-											<div>
-												<div className="mt-1 h-4 w-32 rounded bg-secondary" />
-												<div className="mt-1 h-4 w-20 rounded bg-secondary" />
-											</div>
-											<div className="mt-1 h-4 w-16 rounded bg-secondary" />
+		<div className="bg-background">
+			{/* Hero — full-bleed */}
+			<HeroBannerCarouselLoader slides={SLIDES} />
+
+			{/* Solid-color category tiles */}
+			<CategoryTiles tiles={TILES} />
+
+			{/* Highlight band — Phones */}
+			<ParallaxBand
+				tone="orange"
+				eyebrow="GrapheneOS · pre-hardened"
+				title="Sovereign Phones"
+				ghost="PRIVACY"
+				body="Pixel hardware flashed with GrapheneOS and locked down before it ships. Verify, don't trust."
+				ctaLabel="Shop Phones"
+				ctaHref="/categories/sovereign-mobile-mesh-devices"
+			/>
+
+			{/* Featured products */}
+			<section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+				<div className="mb-8">
+					<h2 className="font-display text-3xl font-bold uppercase tracking-tight sm:text-4xl">Featured</h2>
+					<p className="mt-1 text-sm text-muted-foreground">Hand-picked, ready to run.</p>
+				</div>
+				<Suspense
+					fallback={
+						<ul
+							role="list"
+							data-testid="ProductList"
+							className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+						>
+							{Array.from({ length: 12 }).map((_, i) => (
+								<li key={i} className="animate-pulse">
+									<div className="aspect-square overflow-hidden bg-secondary" />
+									<div className="mt-2 flex justify-between">
+										<div>
+											<div className="mt-1 h-4 w-32 rounded bg-secondary" />
+											<div className="mt-1 h-4 w-20 rounded bg-secondary" />
 										</div>
-									</li>
-								))}
-							</ul>
-						}
-					>
-						<FeaturedProducts params={props.params} />
-					</Suspense>
-				</section>
-			</div>
+										<div className="mt-1 h-4 w-16 rounded bg-secondary" />
+									</div>
+								</li>
+							))}
+						</ul>
+					}
+				>
+					<FeaturedProducts params={props.params} />
+				</Suspense>
+			</section>
+
+			{/* Highlight band — Laptops */}
+			<ParallaxBand
+				tone="dark"
+				eyebrow="Repairable · upgradeable · yours"
+				title="Framework Laptops"
+				ghost="MODULAR"
+				body="Arch and QubesOS-ready machines you can open, upgrade, and actually own."
+				ctaLabel="Shop Laptops"
+				ctaHref="/categories/modular-laptops"
+			/>
 		</div>
 	);
 }

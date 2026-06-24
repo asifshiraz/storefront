@@ -3,7 +3,7 @@ interface LogoProps {
 	ariaLabel?: string;
 }
 
-const BANNER_SRC = "/node-runner-logo-banner.png";
+const BANNER_SRC = "/node-runner-logo-banner.jpeg";
 
 export const Logo = ({ className, ariaLabel = "Node Runner — Bitcoin Hardware & Nodes" }: LogoProps) => {
 	return (
@@ -12,8 +12,8 @@ export const Logo = ({ className, ariaLabel = "Node Runner — Bitcoin Hardware 
 			<img
 				src={BANNER_SRC}
 				alt=""
-				width={1513}
-				height={285}
+				width={1024}
+				height={192}
 				className="h-full w-auto select-none"
 				draggable={false}
 			/>

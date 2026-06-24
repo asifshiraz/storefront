@@ -13,10 +13,11 @@ RUN npm install -g pnpm@10.28.1
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm i --frozen-lockfile --prefer-offline
 
-# Rebuild the source code only when needed
-FROM base AS builder
+# Rebuild the source code only when needed.
+# Inherit from deps so node_modules and the global pnpm install are already present
+# (avoids a second `npm install -g pnpm` network call that can time out).
+FROM deps AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
@@ -40,17 +41,13 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV SALEOR_REQUEST_TIMEOUT_MS=2000
 ENV NEXT_BUILD_RETRIES=0
 
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN npm install -g pnpm@10.28.1
-
 RUN pnpm build
 
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
 

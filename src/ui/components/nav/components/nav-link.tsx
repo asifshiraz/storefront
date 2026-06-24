@@ -15,11 +15,18 @@ export function NavLink({ href, children }: { href: string; children: ReactEleme
 				href={href}
 				prefetch={false}
 				className={clsx(
-					"text-sm font-medium transition-colors",
+					"relative inline-flex items-center py-1 text-xs font-semibold uppercase tracking-[0.15em] transition-colors",
 					isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
 				)}
 			>
 				{children}
+				<span
+					className={clsx(
+						"absolute -bottom-1 left-0 h-0.5 w-full bg-foreground transition-opacity",
+						isActive ? "opacity-100" : "opacity-0",
+					)}
+					aria-hidden
+				/>
 			</LinkWithChannel>
 		</li>
 	);

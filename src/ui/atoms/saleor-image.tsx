@@ -1,16 +1,16 @@
 "use client";
 
 import NextImage, { type ImageProps } from "next/image";
-import { saleorImageLoader } from "@/lib/saleor-image-loader";
 
 /**
- * next/image wrapper that loads images directly from Saleor's thumbnail service
- * via {@link saleorImageLoader}.
+ * next/image wrapper that loads product images directly from Saleor.
  *
- * Must be a Client Component: a custom `loader` is a function prop, and functions
- * cannot cross the Server -> Client boundary. Server Components can still render
- * <SaleorImage> because only serializable props (src, width, alt, …) are passed in.
+ * Saleor already serves pre-sized WebP thumbnails (the GraphQL `thumbnail` field
+ * bakes the size into the URL), so we mark images `unoptimized`: the browser
+ * fetches the Saleor URL directly with no Next.js server-side optimization.
+ * That is what avoids the hairpin-NAT problem — the Next.js container never
+ * fetches the image, only the browser does.
  */
 export function SaleorImage(props: ImageProps) {
-	return <NextImage {...props} loader={saleorImageLoader} />;
+	return <NextImage {...props} unoptimized />;
 }

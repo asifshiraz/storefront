@@ -29,19 +29,18 @@ export const NavLinks = async ({ channel }: { channel: string }) => {
 
 	return (
 		<>
-			<NavLink href="/products">All</NavLink>
 			{data.menu?.items?.map((item) => {
 				if (item.category) {
 					return (
 						<NavLink key={item.id} href={`/categories/${item.category.slug}`}>
-							{item.category.name}
+							{item.name || item.category.name}
 						</NavLink>
 					);
 				}
 				if (item.collection) {
 					return (
 						<NavLink key={item.id} href={`/collections/${item.collection.slug}`}>
-							{item.collection.name}
+							{item.name || item.collection.name}
 						</NavLink>
 					);
 				}

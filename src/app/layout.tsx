@@ -1,7 +1,16 @@
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { Oswald } from "next/font/google";
 import "./globals.css";
 import { type ReactNode } from "react";
+
+// Emphatic display face for headings (category tiles, highlight bands, section titles)
+const display = Oswald({
+	subsets: ["latin"],
+	weight: ["500", "600", "700"],
+	variable: "--font-display",
+	display: "swap",
+});
 import { rootMetadata } from "@/lib/seo";
 import { localeConfig } from "@/config/locale";
 
@@ -36,7 +45,7 @@ export default function RootLayout(props: { children: ReactNode }) {
 	return (
 		<html
 			lang={localeConfig.htmlLang}
-			className={`${GeistSans.variable} ${GeistMono.variable} dark min-h-dvh`}
+			className={`${GeistSans.variable} ${GeistMono.variable} ${display.variable} dark min-h-dvh`}
 			style={{ colorScheme: "dark" }}
 			suppressHydrationWarning
 		>

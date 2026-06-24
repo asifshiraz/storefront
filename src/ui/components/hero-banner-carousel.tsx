@@ -20,7 +20,7 @@ type HeroBannerCarouselProps = {
 };
 
 export function HeroBannerCarousel({ slides }: HeroBannerCarouselProps) {
-	const autoplay = useRef(Autoplay({ delay: 8000, stopOnInteraction: false, stopOnMouseEnter: true }));
+	const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true }));
 
 	if (slides.length === 0) return null;
 

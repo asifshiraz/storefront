@@ -3,15 +3,15 @@ import { GeistMono } from "geist/font/mono";
 import { Oswald } from "next/font/google";
 import "./globals.css";
 import { type ReactNode } from "react";
+import { rootMetadata } from "@/lib/seo";
 
-// Emphatic display face for headings (category tiles, highlight bands, section titles)
+// Emphatic display face for headings (highlight bands, section titles)
 const display = Oswald({
 	subsets: ["latin"],
 	weight: ["500", "600", "700"],
 	variable: "--font-display",
 	display: "swap",
 });
-import { rootMetadata } from "@/lib/seo";
 import { localeConfig } from "@/config/locale";
 
 /**
@@ -22,8 +22,7 @@ export const metadata = rootMetadata;
 
 /**
  * Runs before paint to set the .dark class from localStorage (or fall back
- * to dark — Node Runner is dark-by-default). Prevents the dreaded
- * light-flash-on-load when the user has chosen dark.
+ * to dark — Node Runner is dark-by-default). Prevents the light-flash-on-load.
  */
 const themeInitScript = `
 (function () {

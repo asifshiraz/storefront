@@ -1,3 +1,6 @@
+"use client";
+
+import { useSyncExternalStore } from "react";
 import { LinkWithChannel } from "@/ui/atoms/link-with-channel";
 
 export type CategoryTile = {
@@ -14,7 +17,21 @@ const TONES: Record<CategoryTile["tone"], string> = {
 	stone: "bg-secondary text-foreground",
 };
 
+// Same client-detection pattern as the hero loader: returns getServerSnapshot()
+// (false) during SSR + hydration, then getSnapshot() (true) after mount — so the
+// interactive tiles are only ever rendered on the client and never participate in
+// server hydration. This sidesteps a production React hydration-recovery crash
+// (insertBefore) that the tile anchors otherwise trigger on this page.
+const useIsClient = () =>
+	useSyncExternalStore(
+		() => () => {},
+		() => true,
+		() => false,
+	);
+
 export function CategoryTiles({ tiles }: { tiles: CategoryTile[] }) {
+	const isClient = useIsClient();
+
 	return (
 		<section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
 			<div className="mb-8">
@@ -24,23 +41,24 @@ export function CategoryTiles({ tiles }: { tiles: CategoryTile[] }) {
 				<p className="mt-1 text-sm text-muted-foreground">Sovereign hardware, sorted.</p>
 			</div>
 			<div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-				{tiles.map((t) => (
-					<LinkWithChannel
-						key={t.slug}
-						href={`/categories/${t.slug}`}
-						className={`group relative flex aspect-square flex-col justify-between overflow-hidden p-5 transition-transform duration-300 hover:-translate-y-1 ${
-							TONES[t.tone]
-						}`}
-					>
-						<span className="text-[11px] font-semibold uppercase tracking-[0.2em] opacity-70">{t.sub}</span>
-						<span className="font-display text-2xl font-bold uppercase leading-[0.95] tracking-tight sm:text-3xl">
-							{t.name}
-							<span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">
-								&rarr;
-							</span>
-						</span>
-					</LinkWithChannel>
-				))}
+				{isClient
+					? tiles.map((t) => (
+							<LinkWithChannel
+								key={t.slug}
+								href={`/categories/${t.slug}`}
+								className={`group relative flex aspect-square flex-col justify-between overflow-hidden p-5 transition-transform duration-300 hover:-translate-y-1 ${
+									TONES[t.tone]
+								}`}
+							>
+								<span className="text-[11px] font-semibold uppercase tracking-[0.2em] opacity-70">
+									{t.sub}
+								</span>
+								<span className="font-display text-2xl font-bold uppercase leading-[0.95] tracking-tight sm:text-3xl">
+									{t.name} →
+								</span>
+							</LinkWithChannel>
+						))
+					: tiles.map((t) => <div key={t.slug} className={`aspect-square ${TONES[t.tone]}`} />)}
 			</div>
 		</section>
 	);

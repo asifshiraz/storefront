@@ -15,6 +15,12 @@ export const metadata = {
 
 const SLIDES: HeroSlide[] = [
 	{
+		src: "/banners/carousal-banner-2.png",
+		mobileSrc: "/banners/carousal-banner-2-mobile.png",
+		wideSrc: "/banners/carousal-banner-2-wide.png",
+		alt: "Secure Technologies for a Sovereign Lifestyle",
+	},
+	{
 		src: "/banners/carousal-banner-1.png",
 		mobileSrc: "/banners/carousal-banner-1-mobile.png",
 		wideSrc: "/banners/carousal-banner-1-wide.png",
@@ -57,13 +63,10 @@ async function getFeaturedProducts(channel: string) {
 export default function Page(props: { params: Promise<{ channel: string }> }) {
 	return (
 		<div className="bg-background">
-			{/* Hero — full-bleed */}
 			<HeroBannerCarouselLoader slides={SLIDES} />
 
-			{/* Solid-color category tiles */}
 			<CategoryTiles tiles={TILES} />
 
-			{/* Highlight band — Phones */}
 			<ParallaxBand
 				tone="orange"
 				eyebrow="GrapheneOS · pre-hardened"
@@ -74,7 +77,6 @@ export default function Page(props: { params: Promise<{ channel: string }> }) {
 				ctaHref="/categories/sovereign-mobile-mesh-devices"
 			/>
 
-			{/* Featured products */}
 			<section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
 				<div className="mb-8">
 					<h2 className="font-display text-3xl font-bold uppercase tracking-tight sm:text-4xl">Featured</h2>
@@ -90,13 +92,7 @@ export default function Page(props: { params: Promise<{ channel: string }> }) {
 							{Array.from({ length: 12 }).map((_, i) => (
 								<li key={i} className="animate-pulse">
 									<div className="aspect-square overflow-hidden bg-secondary" />
-									<div className="mt-2 flex justify-between">
-										<div>
-											<div className="mt-1 h-4 w-32 rounded bg-secondary" />
-											<div className="mt-1 h-4 w-20 rounded bg-secondary" />
-										</div>
-										<div className="mt-1 h-4 w-16 rounded bg-secondary" />
-									</div>
+									<div className="mt-2 h-4 w-32 rounded bg-secondary" />
 								</li>
 							))}
 						</ul>
@@ -106,7 +102,6 @@ export default function Page(props: { params: Promise<{ channel: string }> }) {
 				</Suspense>
 			</section>
 
-			{/* Highlight band — Laptops */}
 			<ParallaxBand
 				tone="dark"
 				eyebrow="Repairable · upgradeable · yours"

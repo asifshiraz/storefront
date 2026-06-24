@@ -17,6 +17,7 @@ const SLIDES: HeroSlide[] = [
 	{
 		src: "/banners/carousal-banner-1.png",
 		mobileSrc: "/banners/carousal-banner-1-mobile.png",
+		wideSrc: "/banners/carousal-banner-1-wide.png",
 		alt: "Secure Technologies for a Sovereign Lifestyle",
 	},
 ];
